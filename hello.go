@@ -7,11 +7,12 @@ func Hello(name string, language string) string {
 	if name == "" {
 		name = "World"
 	}
-	if language == "es" {
+	switch language {
+	case "es":
 		helloPrefix = "Hola, "
-	} else if language == "fr" {
+	case "fr":
 		helloPrefix = "Bonjour, "
-	} else {
+	default:
 		helloPrefix = "Hello, "
 	}
 	return helloPrefix + name
