@@ -2,6 +2,7 @@ package arraysandslices
 
 import (
 	"fmt"
+	"reflect"
 	"testing"
 )
 
@@ -29,4 +30,18 @@ func TestSum(t *testing.T) {
 		want := 15
 		assertTest(t, got, want)
 	})
+}
+
+func TestSumAll(t *testing.T) {
+	assertTest := func(t testing.TB, got, want []int) {
+		if !reflect.DeepEqual(got, want) {
+			var gotString string = fmt.Sprint(got)
+			var wantString string = fmt.Sprint(want)
+			errormsg := "Expecting " + wantString + " and recieved " + gotString
+			t.Errorf(errormsg)
+		}
+	}
+	got := sumAll([]int{1, 1, 1}, []int{3, 7, 8, 9, 4})
+	want := []int{3, 31}
+	assertTest(t, got, want)
 }
