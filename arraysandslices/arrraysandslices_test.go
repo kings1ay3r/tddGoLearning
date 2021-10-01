@@ -45,3 +45,25 @@ func TestSumAll(t *testing.T) {
 	want := []int{3, 31}
 	assertTest(t, got, want)
 }
+func TestSumAllTails(t *testing.T) {
+	assertTest := func(t testing.TB, got, want []int) {
+		if !reflect.DeepEqual(got, want) {
+			var gotString string = fmt.Sprint(got)
+			var wantString string = fmt.Sprint(want)
+			errormsg := "Expecting " + wantString + " and recieved " + gotString
+			t.Errorf(errormsg)
+		}
+	}
+	t.Run("Normal Tails", func(t *testing.T) {
+
+		got := sumAllTails([]int{1, 1, 1}, []int{3, 7, 8, 9, 4})
+		want := []int{2, 28}
+		assertTest(t, got, want)
+	})
+	t.Run("Empty Tails", func(t *testing.T) {
+
+		got := sumAllTails([]int{1, 1, 1}, []int{3, 7, 8, 9, 4}, []int{})
+		want := []int{2, 28, 0}
+		assertTest(t, got, want)
+	})
+}

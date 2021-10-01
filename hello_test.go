@@ -5,7 +5,7 @@ import "testing"
 func TestHello(t *testing.T) {
 
 	testAssertion := func(t testing.TB, got, want string) {
-		t.Helper() //! TODO tounderstand
+		t.Helper() //TODO tounderstand
 
 		if got != want {
 			t.Errorf("got %q want %q", got, want)
