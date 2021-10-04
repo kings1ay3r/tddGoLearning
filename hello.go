@@ -1,6 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"d_i/dependency_injection"
+	"log"
+	"net/http"
+)
 
 func Hello(name string, language string) string {
 	var helloPrefix string
@@ -19,5 +23,6 @@ func Hello(name string, language string) string {
 }
 
 func main() {
-	fmt.Println(Hello("Kevin", ""))
+
+	log.Fatal(http.ListenAndServe(":5050", http.HandlerFunc(dependency_injection.MyGreeterHandler)))
 }
