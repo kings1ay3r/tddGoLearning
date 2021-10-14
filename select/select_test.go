@@ -1,10 +1,23 @@
 package select_
 
-import "testing"
+import (
+	"net/http"
+	"net/http/httptest"
+	"testing"
+	"time"
+)
 
 func TestRacer(t *testing.T) {
-	slowurl := "http://facebook.com"
-	fasturl := "https://www.google.com"
+
+	slowServer := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		time.Sleep(20 * time.Millisecond)
+		w.WriteHeader(http.StatusOK)
+	}))
+	fastServer := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusOK)
+	}))
+	slowurl := slowServer.URL
+	fasturl := fastServer.URL
 
 	want := fasturl
 	got := Racer(slowurl, fasturl)
